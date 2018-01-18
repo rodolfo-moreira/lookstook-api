@@ -17,4 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::middleware(['auth.basic'])->group(function () {
+    Route::get('/products', 'ProductsController@index');
+	Route::get('/products/{id}', 'ProductsController@show');
+	Route::post('/products', 'ProductsController@store');
+	Route::put('/products/{id}', 'ProductsController@update');
+	Route::delete('/products/{id}', 'ProductsController@delete');
+});
