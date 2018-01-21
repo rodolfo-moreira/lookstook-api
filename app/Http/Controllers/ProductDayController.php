@@ -11,7 +11,7 @@ class ProductDayController extends Controller
 {
     public function productDay(){
 
-    	$productDay = ProductDay::first();
+    	$productDay = ProductDay::with('id_product.created_by')->first();
     	$now = Carbon::now();
 
     	if(is_null($productDay)){

@@ -12,17 +12,13 @@ class ProductsController extends Controller
 
     public function index(){ 
 
-    	//$books = App\Book::with(['author', 'publisher'])->get();
-
-    	$products = Products::with('created_by')->get();
-
+    	$products = Products::with('created_by')->with('updated_by')->get();
     	return $products;
     }
 
+
     public function show($id){
-    	$product = Products::find($id);
-    	$product->created_by = User::find($product->created_by);
-    	$product->updated_by = User::find($product->updated_by);
+    	$product = Products::with('created_by')->with('updated_by')->find($id);
     	return $product;
     }
 

@@ -15,4 +15,8 @@ class ProductDay extends Model
 		'updated_at',
 		'deleted_at'
 	]; 
+
+	public function id_product(){
+		return $this->hasMany( 'App\Products', 'id', 'id_product' );
+	}
 }

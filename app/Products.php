@@ -20,12 +20,13 @@ class Products extends Model
 		'deleted_at'
 	]; 
 
-	public function relation($data){
-		foreach ($data as $dt) {
-			$dt->created_by = User::find($dt->created_by);			 
-		}
+	public function created_by(){
+		return $this->hasMany( 'App\User', 'id', 'created_by' );
 	}
 
+	public function updated_by(){
+		return $this->hasMany( 'App\User', 'id', 'updated_by' );
+	}
 
 
 }
