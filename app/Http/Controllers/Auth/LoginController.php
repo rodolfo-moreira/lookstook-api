@@ -42,12 +42,10 @@ class LoginController extends Controller
     public function doLogin(Request $request){
 
        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-        
-            //Login Successful 
-           $response = array('success' => true);
-
-           //return a JSON response 
-           return response()->json($response);
+            
+            $header = Auth::basic();      
+            $response = array('basic' => $header);
+            return response()->json($response);
        }
        else{
 
