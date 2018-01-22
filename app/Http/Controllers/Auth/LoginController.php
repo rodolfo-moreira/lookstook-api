@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -57,5 +58,15 @@ class LoginController extends Controller
 
     public function doLogout(){
         Auth::logout();
+    }
+
+    public function createUser(Request $request){
+        $user = new User();
+        $user->name = $request['name'];
+        $user->password = bcrypt($request['password']);
+        $user->email = $request['email'];
+        $user->save();
+        return response()->json($user, 200);
+
     }
 }

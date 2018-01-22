@@ -20,7 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 
-//Route::post('/doLogin',  'Auth\LoginController@doLogin');
 
 
 Route::middleware(['auth.basic'])->group(function () {
@@ -40,7 +39,9 @@ Route::middleware(['auth.basic'])->group(function () {
 });
 
 
+Route::post('/registerUser', 'Auth\RegisterController@create');
 
 Route::post('/doLogin', 'Auth\LoginController@doLogin');
 Route::get('/doLogout', 'Auth\LoginController@doLogout');
+Route::post('/createUser', 'Auth\LoginController@createUser');
 
