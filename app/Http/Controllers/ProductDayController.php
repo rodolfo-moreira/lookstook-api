@@ -20,8 +20,8 @@ class ProductDayController extends Controller
     		$productSave['id_product'] = $productRandom->id;
 
     		//return $productSave;
-	    	$returnProduct = ProductDay::create($productSave);		
-	    	return $returnProduct;
+	    	$returnProduct = ProductDay::create($productSave);
+            return response()->json($returnProduct, 200);
 
     	}else if($now->toDateString() != $productDay->updated_at->toDateString()){
 
@@ -29,11 +29,11 @@ class ProductDayController extends Controller
 			$productDay['id_product'] = $productRandom->id;
 
 			$productDay->save();
-			return $productDay;
+            return response()->json($productDay, 200);
 
 		}else{
 
-			return $productDay;
+            return response()->json($productDay, 200);
 		}   		
     	
     }

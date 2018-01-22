@@ -13,13 +13,13 @@ class ProductsController extends Controller
     public function index(){ 
 
     	$products = Products::with('created_by')->with('updated_by')->get();
-    	return $products;
+        return response()->json($products, 200);
     }
 
 
     public function show($id){
     	$product = Products::with('created_by')->with('updated_by')->find($id);
-    	return $product;
+        return response()->json($products, 200);
     }
 
     public function store(Request $request){
@@ -27,7 +27,9 @@ class ProductsController extends Controller
     	$user = Auth::user();
     	$product['created_by'] = $user->id;
     	$product['updated_by'] = $user->id;
-    	Products::create($product);
+    	$returnProduct = Products::create($product);
+
+        return response()->json($returnProduct, 201);
     }
 
     public function update($id, Request $request){
@@ -42,10 +44,13 @@ class ProductsController extends Controller
 	    	$product['created_by'] = $user->id;
 	    	$product['updated_by'] = $user->id;
 
-	    	$product->save();
+            $returnProduct = $product->save();
+            return response()->json($returnProduct, 200);
 
     	}else{
-    		return "Precisa ter o mesmo id de usuario";
+    		
+            $response = array('message' => 'Você precica ter criado o produto para edita-lo');
+            return response()->json($response, 401);
     	}
 
     	
@@ -61,15 +66,20 @@ class ProductsController extends Controller
 	    	$product = Products::find($id);
 			$product->delete();
 
+            $response = array('message' => 'Deletado com sucesso!');
+            return response()->json($response, 204);
+
 		}else{
-    		return "Precisa ter o mesmo id de usuario";
+    	
+            $response = array('message' => 'Você precica ter criado o produto para exclui-lo');
+            return response()->json($response, 401);
     	}
     }
 
     public function last(){
 
     	$product = Products::orderBy('created_at', 'desc')->first();
-    	return $product;
+        return response()->json($product, 200);
     }
 
 
