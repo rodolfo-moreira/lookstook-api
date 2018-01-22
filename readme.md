@@ -39,6 +39,10 @@ Exceture as migrations:
 
 - php artisan migrate
 
+Rode a aplicação:
+
+- php artisan serve
+
 
 ## License
 
