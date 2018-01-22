@@ -19,7 +19,11 @@ Tenha o Laravel, PHP, npm e composer Instalados
 
 Após fazer o clone do projeto do git
 
-Instale as dependências:
+Rode o composer:
+
+- npm install
+
+Rode o composer:
 
 - composer install
 
